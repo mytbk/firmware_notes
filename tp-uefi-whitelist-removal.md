@@ -14,3 +14,7 @@ r2 -w -c 'wa ret' /tmp/wl.efi
 
 然后刷那个新文件，白名单已经没了。
 
+注:
+- 此方案只对ThinkPad的UEFI固件有效，而且未做足够的测试，如果有问题请给issue说明。
+- 在学习UEFI之后，我准备再次对这个模块进行逆向分析。
+- 传统修改方案及刷写方法请参考: [xx30 BIOS Whitelist Removal](https://github.com/bibanon/Coreboot-ThinkPads/wiki/xx30-BIOS-Whitelist-Removal)
