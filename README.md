@@ -1,7 +1,7 @@
 # 一些firmware手记
 
 ### coreboot & libreboot
-* [WIP:USB debug gadget]
+* [USB debug gadget](usb-debug-gadget.md)
 
 ### Tianocore
 * [WIP:edk2及clover的编译]
