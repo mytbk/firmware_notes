@@ -3,6 +3,8 @@
 ### coreboot & libreboot
 * [USB debug gadget](usb-debug-gadget.md)
 
+### 《UEFI原理与编程》学习笔记
+
 ### Tianocore
 * [WIP:edk2及clover的编译]
 * [WIP:Tianocore payload]
