@@ -16,4 +16,5 @@
 * [从机器取出BIOS芯片](2760p-flash-chip.md)
 * [用UEFITool分析BIOS](uefitool.md)
 * [找USB调试口](ehci-debug-port.md)
+* [BIOS区域测试(WIP)](bios-region.md)
 * [TODO:coreboot autoport]
