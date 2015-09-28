@@ -4,6 +4,7 @@
 * [USB debug gadget](usb-debug-gadget.md)
 
 ### 《UEFI原理与编程》学习笔记
+* [edk2的编译](uefi/building-edk2.md)
 
 ### Tianocore
 * [WIP:edk2及clover的编译]
