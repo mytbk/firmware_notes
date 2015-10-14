@@ -15,3 +15,7 @@
 * [TODO:coreboot with smapi?]
 
 ### [一些机器的实验笔记](machines.md)
+
+### 文章收藏
+* [BIOS硬盘加密的逆向研究](https://jbeekman.nl/blog/2015/03/reverse-engineering-uefi-firmware/)
+* [UEFI编程入门](http://x86asm.net/articles/uefi-programming-first-steps/)
