@@ -14,10 +14,4 @@
 * [ThinkPad UEFI固件去白名单](tp-uefi-whitelist-removal.md)
 * [TODO:coreboot with smapi?]
 
-### HP Elitebook 2760p
-* [BIOS Update](2760p-bios-update.md)
-* [从机器取出BIOS芯片](2760p-flash-chip.md)
-* [用UEFITool分析BIOS](uefitool.md)
-* [找USB调试口](ehci-debug-port.md)
-* [BIOS区域测试(WIP)](bios-region.md)
-* [TODO:coreboot autoport]
+### [一些机器的实验笔记](machines.md)
