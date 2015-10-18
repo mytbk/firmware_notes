@@ -14,7 +14,7 @@
 * [ThinkPad UEFI固件去白名单](tp-uefi-whitelist-removal.md)
 * [TODO:coreboot with smapi?]
 
-### [一些机器的实验笔记](machines.md)
+### [一些机器的实验笔记](machines/README.md)
 
 ### 文章收藏
 * [BIOS硬盘加密的逆向研究](https://jbeekman.nl/blog/2015/03/reverse-engineering-uefi-firmware/)
