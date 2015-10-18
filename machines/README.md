@@ -8,4 +8,4 @@
 
 ### Lenovo ThinkPad T420
 * [TODO: 系统待机唤醒后USB的bug的研究]
-* [TODO: T420用Ivy Bridge CPU的更多测试]
+* [T420用Ivy Bridge CPU的更多测试](t420/ivb-test.md)
