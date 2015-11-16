@@ -1,8 +1,9 @@
 # 一些firmware手记
 
 ### coreboot,libreboot,tools
-* [USB debug gadget](usb-debug-gadget.md)
+* [USB debug gadget](coreboot/usb-debug-gadget.md)
 * [Raspberry Pi做编程器](rpi-flashing.md)
+* [X200刷libreboot](coreboot/x200-libreboot.md)
 
 ### 《UEFI原理与编程》学习笔记
 * [edk2的编译](uefi/building-edk2.md)
