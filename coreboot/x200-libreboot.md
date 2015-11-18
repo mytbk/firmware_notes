@@ -2,6 +2,8 @@
 
 今天终于成功地把libreboot刷入了X200,做一点总结。
 
+UPDATE: 在libreboot的邮件列表谈了下关于flashrom供电的问题，有人说用BeagleBone的外接5V电源就行了，我试了一下，果然可以。看来我的ATX电源是白买了......不过呢，如果用树莓派的话，还是要挂电源，因为树莓派没有DC供电口。
+
 首先是供电问题，之前试了ch341a编程器，树莓派，BeagleBone.它们都可以刷写不在板上的芯片，但都刷不了X200.后来到flashrom的IRC上问了一下，得知X200的BIOS芯片需要外接供电才能刷写。于是我试了好几种供电设备，用了实验室的可调电源，12V转3.3V的模块，都不能刷X200，最后用了ATX才成功。
 
 关于ATX的说明，libreboot官方网站上已经讲述了[配置方法](http://libreboot.org/docs/install/bbb_setup.html)了。我用的是24针的ATX.首先看[Wikipedia](https://en.wikipedia.org/wiki/Power_supply_unit_%28computer%29#Wiring_diagrams)上的ATX引脚，把ATX接上电之后，要把16针(Power on)和一根地线的针脚短接(我用的是17针)，这样就能启动ATX电源。然后我用万用表确定了要用的3.3V针脚。连接时用ATX的3.3V接到测试夹的VCC上(SOIC-16的2号针)，然后把ATX的地线接到BeagleBone的一个接地针上。于是完成ATX的配置。
