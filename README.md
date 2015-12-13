@@ -2,7 +2,7 @@
 
 ### coreboot,libreboot,tools
 * [USB debug gadget](coreboot/usb-debug-gadget.md)
-* [Raspberry Pi做编程器](rpi-flashing.md)
+* [CubieTruck SPI](coreboot/cubietruck-spi.md)
 * [X200刷libreboot](coreboot/x200-libreboot.md)
 
 ### 《UEFI原理与编程》学习笔记
