@@ -2,6 +2,7 @@
 
 ### coreboot,libreboot,tools
 * [USB debug gadget](coreboot/usb-debug-gadget.md)
+* [libpayload分析](coreboot/libpayload/00-index.md)
 * [CubieTruck SPI](coreboot/cubietruck-spi.md)
 * [X200刷libreboot](coreboot/x200-libreboot.md)
 
