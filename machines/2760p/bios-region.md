@@ -9,4 +9,70 @@ UEFITool分析出来的几个padding区域是可以改写的，改写后可以�
 
 最后我还试了下改写ME固件，填掉了ME固件的头1M后，系统正常启动，不过也出现了半小时后自动关机的现象。
 
+### update at 2016.04.03
 
+后来发现UEFITool找到的那个0x108000的padding区域非常可疑，因为将前面的区域用随机值填写后，插入电池后仍然正常，但修改了此区域的部分数据后，插入电池后电量指示灯就不断地闪。于是我要对它进行分析。
+
+我用UEFITool提取了这部分区域，然后用wxmedit看了一下，发现里面很多地方都是0xff，中间有几片非0xff的区域，其中还有一些有意义的字符串。我用strings看了一下，发现一些比较有意思的内容：
+
+```
+A01/26/15 koutfld  Copyright 2003 - 2010 by Hewlett-Packard Company.x
+```
+
+```
+2DeepSleep
+Exiting DeepSleep
+RTC power loss=%bu
+**** 8051 RESET ****
+Kernel:  %02bX.%02bX, 
+ Checksum=%04X
+Machine: %02bX.%02bX, 
+DeviceId=%02bXh
+OnState()
+Before OnState loop
+OffState()
+StandbyState()
+Exited StandbyState() loop
+SetupWakeup
+```
+
+```
+DebugTimer=%u
+```
+
+```
+[5m**Bus:%bd,Mux:%02bXh,Addr:%02bXh,AbError:%02bXh,AbClock:%02bXh
+```
+
+```
+Vcc1Init
+Vcc2Init
+DisableVcc2Outputs
+EnableVcc2Outputs
+```
+
+```
+V=%u,I=%d,P=%u,PMC=%u
+PMC Calibration Snapshot taken
+```
+
+```
+IsAmtFlashUnlock()=%bd
+```
+
+```
+PECI timeout error
+Cmd FCS error: %02bXh,%02bXh
+PECI: All data is zero!
+Data FCS error: %02bXh,%02bXh
+PECI bad completion code %02bXh
+Error reading Tjmax via PECI
+PECI bad temperature: MSB=%02bX, LSB=%02bXh
+PL1=%bu,PL2=%bu
+```
+
+```
+C:\BuildACMs_BIOSAC__Rev1.0_RC2\Projects\Snb\BIOSAC\BUILD\Release\BIOSAC_REL.pdb
+```
+
+尤其是最后一个，可以发现这段代码可能来自一个叫BIOSAC的项目，而且还说明了是SNB平台。但是在Google上也查不到相关的信息，只好先不研究了。
