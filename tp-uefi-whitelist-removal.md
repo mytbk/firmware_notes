@@ -14,7 +14,9 @@ r2 -w -c 'wa ret' /tmp/wl.efi
 
 然后刷那个新文件，白名单已经没了。
 
-更新: 在知道了UEFITool中有一个UEFIPatch工具之后，发现用UEFIPatch更加方便。首先可以找出入口点开头的指令是sub rsp,0x38和call xxxx.于是把这几个字节的模式拿出来，之后让UEFIPatch找到这个模式，然后替换就行了，我们写如下patches.txt文件。(井号开头的是注释，可以去掉。)之后执行``UEFIPatch <ROMFILE>''，得到一个以.patched的新文件即为修改好的文件。
+#### UEFIPatch
+
+在知道了UEFITool中有一个UEFIPatch工具之后，发现用UEFIPatch更加方便。首先可以找出入口点开头的指令是sub rsp,0x38和call xxxx.于是把这几个字节的模式拿出来，之后让UEFIPatch找到这个模式，然后替换就行了，我们写如下patches.txt文件。(井号开头的是注释，可以去掉。)之后执行``UEFIPatch <ROMFILE>''，得到一个以.patched的新文件即为修改好的文件。
 
 
 ```
