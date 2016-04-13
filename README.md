@@ -5,6 +5,7 @@
 * [libpayload分析](coreboot/libpayload/00-index.md)
 * [CubieTruck SPI](coreboot/cubietruck-spi.md)
 * [X200刷libreboot](coreboot/x200-libreboot.md)
+* [Sandy/Ivy Bridge memory frequency](coreboot/snb_mem_min_tck.md)
 
 ### 《UEFI原理与编程》学习笔记
 * [edk2的编译](uefi/building-edk2.md)
