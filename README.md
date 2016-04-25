@@ -10,6 +10,7 @@
 ### 《UEFI原理与编程》学习笔记
 * [edk2的编译](uefi/building-edk2.md)
 * [Quark BSP GRUB legacy的编译](uefi/quark-grub-legacy.md)
+* [使用OpenSSL](uefi/using-openssl.md)
 
 ### Tianocore
 * [WIP:edk2及clover的编译]
