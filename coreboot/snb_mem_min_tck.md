@@ -22,15 +22,31 @@ If you want to unlock the maximum frequency, you can patch as follows:
 
 ```
 diff --git a/src/northbridge/intel/sandybridge/raminit.c b/src/northbridge/intel/sandybridge/raminit.c
-index 042898d..4d11415 100644
+index 042898d..3451beb 100644
 --- a/src/northbridge/intel/sandybridge/raminit.c
 +++ b/src/northbridge/intel/sandybridge/raminit.c
-@@ -4354,5 +4358,5 @@ void perform_raminit(int s3resume)
+@@ -4284,6 +4284,7 @@ void init_dram_ddr3(spd_raw_data *spds, int mobile, int min_tck,
+ #define HOST_BRIDGE	PCI_DEVFN(0, 0)
+ #define DEFAULT_TCK	TCK_800MHZ
  
-        timestamp_add_now(TS_BEFORE_INITRAM);
++#if 0
+ static unsigned int get_mem_min_tck(void)
+ {
+ 	u32 reg32;
+@@ -4342,6 +4343,7 @@ static unsigned int get_mem_min_tck(void)
+ 			return TCK_400MHZ;
+ 	}
+ }
++#endif
  
--       init_dram_ddr3(spd, 1, get_mem_min_tck(), s3resume);
-+       init_dram_ddr3(spd, 1, TCK_1333MHZ, s3resume);
+ void perform_raminit(int s3resume)
+ {
+@@ -4354,5 +4356,5 @@ void perform_raminit(int s3resume)
+ 
+ 	timestamp_add_now(TS_BEFORE_INITRAM);
+ 
+-	init_dram_ddr3(spd, 1, get_mem_min_tck(), s3resume);
++	init_dram_ddr3(spd, 1, TCK_1333MHZ, s3resume);
  }
 ```
 
