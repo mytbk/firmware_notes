@@ -7,12 +7,11 @@
 * [X200刷libreboot](coreboot/x200-libreboot.md)
 * [Sandy/Ivy Bridge memory frequency](coreboot/snb_mem_min_tck.md)
 
-### 《UEFI原理与编程》学习笔记
+### UEFI学习笔记
 * [edk2的编译](uefi/building-edk2.md)
 * [Quark BSP GRUB legacy的编译](uefi/quark-grub-legacy.md)
 * [使用OpenSSL](uefi/using-openssl.md)
-
-### Tianocore
+* [让UEFI自动执行一个模块](uefi/uefi-driver.md)
 * [WIP:edk2及clover的编译]
 * [WIP:Tianocore payload]
 
