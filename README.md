@@ -12,6 +12,8 @@
 * [Quark BSP GRUB legacy的编译](uefi/quark-grub-legacy.md)
 * [使用OpenSSL](uefi/using-openssl.md)
 * [让UEFI自动执行一个模块](uefi/uefi-driver.md)
+* [(小技巧)生成UUID](uefi/genuuid.md)
+* [UEFI逆向方法分析](uefi/reverse-uefi.md)
 * [WIP:edk2及clover的编译]
 * [WIP:Tianocore payload]
 
