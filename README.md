@@ -32,3 +32,4 @@
 * [SOP16与SOP8对应图](http://www.biosrepair.com/bios/TSSOP16.htm)
 * [PCI Express pinout](http://www.allpinouts.org/index.php/PCI_Express_Card_and_PCI_Express_Mini_Card)
 * [DIP socket as clip](https://www.flashrom.org/File:DIP_socket_as_SOIC_clip.jpg)
+* [Use FreeBSD on Hikey](https://wiki.freebsd.org/arm64/HiKey)
