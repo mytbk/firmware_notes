@@ -1,7 +1,32 @@
 ## ThinkPad UEFI固件白名单去除
 从Sandy Bridge一代开始，ThinkPad开始使用UEFI结构的固件，因此可以很容易地用UEFITool分析。以下可以用简单的方法去除ThinkPad UEFI固件的白名单。
 
-首先还是打开UEFITool,搜索网卡的id,可以定位到LenovoWmaPolicyDxe.efi这个DXE驱动。我们在PE32 image section右键，选extract body把这个EFI程序提取到/tmp/wl.efi.
+### 操作方法
+
+把原来的固件用编程器备份出来。如果是xx20这代机型的话，似乎用固件升级程序给的新版固件镜像也行。用UEFITool打开这个文件,搜索网卡的id或者“1802”这个Unicode字符串，可以定位到LenovoWmaPolicyDxe.efi这个DXE驱动。
+
+然后在这个类型为File，名字是一个GUID的项上右键，Remove，删掉这个模块。
+
+之后用File->Save image file保存到一个新的文件，然后刷这个新的文件就行了。
+
+类似的可以把固件里面Computrace之类的功能也删掉，根据UEFI镜像里面文件名找相应模块就行了。
+
+### 备注
+
+- 此方案只对ThinkPad的UEFI固件有效，而且未做足够的测试。此外，这个方法非常暴力，如果被删的模块有一些初始化硬件的代码，删除了模块之后会导致硬件无法正常使用，这可能是部分机型进行此操作后网卡无法使用的原因。
+- 我已经模块进行了一点逆向分析，但由于UEFI固件的一些特性，我还没能弄清楚里面做了什么。
+- 传统修改方案及刷写方法请参考: [xx30 BIOS Whitelist Removal](https://github.com/bibanon/Coreboot-ThinkPads/wiki/xx30-BIOS-Whitelist-Removal)
+
+已测试机型:
+- X220 (写本文时所用的机型)
+- W530 (见[51nb](http://forum.51nb.com/forum.php?mod=viewthread&tid=1623560&extra=page%3D1%26filter%3Ddigest%26digest%3D1)文章)
+- T520 (本人测试)
+- T430i ([测试失败，能启动但网卡启动失败](http://forum.51nb.com/forum.php?mod=viewthread&tid=1661941&extra=page%3D2%26filter%3Dtypeid%26typeid%3D4))
+- X230([有人修改，结果未知](http://forum.51nb.com/forum.php?mod=viewthread&tid=1664487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D4))
+
+### (以下是老版本的内容，大家可以不看)
+
+我们在PE32 image section右键，选extract body把这个EFI程序提取到/tmp/wl.efi.
 
 ![UEFITool](pic/x220-bios.png)
 
@@ -50,15 +75,3 @@ r2 -w -c 'wa ret' /tmp/wl.efi
 79E0EDD7-9D1D-4F41-AE1A-F896169E5216 10 P:4883EC..E8:C390909090 
 
 ```
-
-注:
-- 此方案只对ThinkPad的UEFI固件有效，而且未做足够的测试，如果有问题请给issue说明。
-- 在学习UEFI之后，我准备再次对这个模块进行逆向分析。
-- 传统修改方案及刷写方法请参考: [xx30 BIOS Whitelist Removal](https://github.com/bibanon/Coreboot-ThinkPads/wiki/xx30-BIOS-Whitelist-Removal)
-
-已测试机型:
-- X220 (写本文时所用的机型)
-- W530 (见[51nb](http://forum.51nb.com/forum.php?mod=viewthread&tid=1623560&extra=page%3D1%26filter%3Ddigest%26digest%3D1)文章)
-- T520 (本人测试)
-- T430i ([测试失败，能启动但网卡启动失败](http://forum.51nb.com/forum.php?mod=viewthread&tid=1661941&extra=page%3D2%26filter%3Dtypeid%26typeid%3D4))
-- X230([有人修改，结果未知](http://forum.51nb.com/forum.php?mod=viewthread&tid=1664487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D4))
