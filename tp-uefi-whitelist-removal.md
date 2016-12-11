@@ -1,6 +1,8 @@
 ## ThinkPad UEFI固件白名单去除
 从Sandy Bridge一代开始，ThinkPad开始使用UEFI结构的固件，因此可以很容易地用UEFITool分析。以下可以用简单的方法去除ThinkPad UEFI固件的白名单。
 
+**注意本文只是用于讲解UEFITool的使用方法。对于支持的coreboot的机型，建议使用自由的coreboot作为计算机的固件。**
+
 ### 操作方法
 
 把原来的固件用编程器备份出来。如果是xx20这代机型的话，似乎用固件升级程序给的新版固件镜像也行。用UEFITool打开这个文件,搜索网卡的id或者“1802”这个Unicode字符串，可以定位到LenovoWmaPolicyDxe.efi这个DXE驱动。
@@ -19,10 +21,11 @@
 
 已测试机型:
 - X220 (写本文时所用的机型)
-- W530 (见[51nb](http://forum.51nb.com/forum.php?mod=viewthread&tid=1623560&extra=page%3D1%26filter%3Ddigest%26digest%3D1)文章)
+- W530 ([51nb](http://forum.51nb.com/forum.php?mod=viewthread&tid=1623560&extra=page%3D1%26filter%3Ddigest%26digest%3D1))
 - T520 (本人测试)
 - T430i ([测试失败，能启动但网卡启动失败](http://forum.51nb.com/forum.php?mod=viewthread&tid=1661941&extra=page%3D2%26filter%3Dtypeid%26typeid%3D4))
-- X230([有人修改，结果未知](http://forum.51nb.com/forum.php?mod=viewthread&tid=1664487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D4))
+- X230 ([有人修改，结果未知](http://forum.51nb.com/forum.php?mod=viewthread&tid=1664487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D4))
+- T430s ([51nb](http://forum.51nb.com/thread-1699770-1-6.html))
 
 ### (以下是老版本的内容，大家可以不看)
 
