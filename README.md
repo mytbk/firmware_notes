@@ -6,6 +6,7 @@
 * [CubieTruck SPI](coreboot/cubietruck-spi.md)
 * [X200刷libreboot](coreboot/x200-libreboot.md)
 * [Sandy/Ivy Bridge memory frequency](coreboot/snb_mem_min_tck.md)
+* [Use NVMe in QEMU](coreboot/NVMe_in_QEMU.rst)
 
 ### UEFI学习笔记
 * [edk2的编译](uefi/building-edk2.md)
