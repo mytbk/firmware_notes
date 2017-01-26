@@ -4,7 +4,7 @@
 * [用UEFITool分析BIOS](2760p/uefitool.md)
 * [找USB调试口](2760p/ehci-debug-port.md)
 * [BIOS区域测试(WIP)](2760p/bios-region.md)
-* [TODO:coreboot autoport]
+* [coreboot for 2760p](2760p/2760p-coreboot.rst)
 
 ### Lenovo ThinkPad T420
 * [TODO: 系统待机唤醒后USB的bug的研究]
