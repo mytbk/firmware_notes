@@ -28,6 +28,9 @@ phase, so I tried to set the CBFS size be the size of this volume,
 0x60000. Fortunately, it's enough to contain a CBFS with SeaBIOS
 payload.
 
+UPDATE(2017-01-28): it seems that CBFS size can be enlarge to 0x66000,
+but I'll try it with factory firmware.
+
 EHCI is also a problem. Thank phcoder for pointing out the
 *USBDEBUG_HCD_INDEX* thing in the autoport document. I've tried using
 EHCI debug port in Linux, and know I should use dbgp1, whose PCI
