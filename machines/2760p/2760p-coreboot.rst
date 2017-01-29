@@ -28,8 +28,13 @@ phase, so I tried to set the CBFS size be the size of this volume,
 0x60000. Fortunately, it's enough to contain a CBFS with SeaBIOS
 payload.
 
-UPDATE(2017-01-28): it seems that CBFS size can be enlarge to 0x66000,
-but I'll try it with factory firmware.
+UPDATE(2017-01-29): CBFS can be enlarge to 0x7000. The structure of the
+blob at 0x780000 is::
+
+  <16-bit payload length> <16-bit checksum> <payload>
+
+but I don't know what the checksum algorithm is, but adding 0x00 at the end
+does not change the checksum.
 
 EHCI is also a problem. Thank phcoder for pointing out the
 *USBDEBUG_HCD_INDEX* thing in the autoport document. I've tried using
