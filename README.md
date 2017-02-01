@@ -24,6 +24,7 @@
 
 ### ThinkPad firmware
 * [ThinkPad UEFI固件去白名单](tp-uefi-whitelist-removal.md)
+* [Blobs for HP laptops](blobs_for_hp_laptops.rst)
 * [TODO:coreboot with smapi?]
 
 ### [一些机器的实验笔记](machines/README.md)
