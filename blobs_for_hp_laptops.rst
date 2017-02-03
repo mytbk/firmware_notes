@@ -48,3 +48,9 @@ sum seems to be a requirement.
 I tried to change the four bytes at 0x7fff04 to f7 00 08 ff and move
 the blob to 0x770000, and also change them to f0 00 0f ff and move the
 blob to 0x700000. They both work.
+
+Also, the first two bytes ff f7 means the other blob is located at 0xfff700.
+If this blob is moved, it also works.
+
+However, swapping the first 4 bytes and the second 4 bytes doesn't work.
+That means the two blobs have different functions.
