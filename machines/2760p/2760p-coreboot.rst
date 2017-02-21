@@ -28,7 +28,7 @@ phase at 0x780000, so I tried to set the CBFS size be the size of this volume,
 0x60000. 
 
 UPDATE(2017-02-21): You can also move the blob padding before the CBFS.
-Refer to `<../blobs_for_hp_laptops.rst>`_.
+Refer to `<../../blobs_for_hp_laptops.rst>`_.
 
 EHCI is also a problem. Thank phcoder for pointing out the
 *USBDEBUG_HCD_INDEX* thing in the autoport document. I've tried using
@@ -59,7 +59,7 @@ Get the EC data from the factory firmware::
  dd if=2760p-factory.rom of=ec-data.bin bs=1 skip=8386304 count=2048
  dd if=2760p-factory.rom of=ec-fw.bin bs=1 skip=7864320 count=65536
 
-Use `hp_ec_insert <https://github.com/mytbk/firmware_notes/wiki/hp_ec_insert.c>`
+Use `hp_ec_insert <https://github.com/mytbk/firmware_notes/wiki/hp_ec_insert.c>`_
 to write them to build/coreboot.rom. I'll put the firmware block at 0x780000
 to the beginning of the BIOS region before the 2MB CBFS size::
 
