@@ -24,17 +24,11 @@ So what I need to reserve is the 0x7ff700-0x7fff07. So I set
 the end of memory.
 
 Also there is a padding for EC before the volume that stores the PEI
-phase, so I tried to set the CBFS size be the size of this volume,
-0x60000. Fortunately, it's enough to contain a CBFS with SeaBIOS
-payload.
+phase at 0x780000, so I tried to set the CBFS size be the size of this volume,
+0x60000. 
 
-UPDATE(2017-01-29): CBFS can be enlarge to 0x7000. The structure of the
-blob at 0x780000 is::
-
-  <16-bit payload length> <16-bit checksum> <payload>
-
-but I don't know what the checksum algorithm is, but adding 0x00 at the end
-does not change the checksum.
+UPDATE(2017-02-21): You can also move the blob padding before the CBFS.
+Refer to `<../blobs_for_hp_laptops.rst>`_.
 
 EHCI is also a problem. Thank phcoder for pointing out the
 *USBDEBUG_HCD_INDEX* thing in the autoport document. I've tried using
@@ -50,30 +44,25 @@ How to build it?
 
 Here's some note about how to build coreboot for HP Elitebook 2760p.
 
-First backup your factory firmware and write it to another flash chip.
+First backup your factory firmware.
 
-Get the code and build it, remember to set the CBFS size to 0x60000::
+Get the code and build it. If you don't want to move the blobs,
+remember to set the CBFS size to 0x60000::
 
- git fetch origin refs/changes/09/14209/5
+ git fetch origin refs/changes/41/18241/10
  git checkout FETCH_HEAD
  make nconfig
  make
 
 Get the EC data from the factory firmware::
 
- dd if=2760p-factory.rom of=ec-data.bin bs=1 skip=8386304 count=2056
+ dd if=2760p-factory.rom of=ec-data.bin bs=1 skip=8386304 count=2048
+ dd if=2760p-factory.rom of=ec-fw.bin bs=1 skip=7864320 count=65536
 
-Write it to build/coreboot.rom::
+Use `hp_ec_insert <https://github.com/mytbk/firmware_notes/wiki/hp_ec_insert.c>`
+to write them to build/coreboot.rom. I'll put the firmware block at 0x780000
+to the beginning of the BIOS region before the 2MB CBFS size::
 
- dd if=ec-data.bin of=build/coreboot.rom bs=1 seek=8386304 conv=notrunc
+ ./hp_ec_insert build/coreboot.rom ec-data.bin ec-fw.bin -0x900 -0x300000
 
-At last flash the CBFS to the target flash chip, in my example I use a
-CH341A programmer::
-
- flashrom -p ch341a_spi -c MX25L6436E/MX25L6445E/MX25L6465E/MX25L6473E \
-   --layout cbfs-layout.txt --image cbfs -w build/coreboot.rom
-
-where cbfs-layout.txt is::
-
- 007a0000:007fffff cbfs
-
+At last flash the BIOS part of build/coreboot.rom.
