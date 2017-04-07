@@ -26,6 +26,7 @@
 - T430i ([测试失败，能启动但网卡启动失败](http://forum.51nb.com/forum.php?mod=viewthread&tid=1661941&extra=page%3D2%26filter%3Dtypeid%26typeid%3D4))
 - X230 ([有人修改，结果未知](http://forum.51nb.com/forum.php?mod=viewthread&tid=1664487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D4))
 - T430s ([51nb](http://forum.51nb.com/thread-1699770-1-6.html))
+- E531
 
 ### (以下是老版本的内容，大家可以不看)
 
