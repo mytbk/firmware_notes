@@ -22,15 +22,18 @@
 ### Intel Galileo
 * [Galileo Gen2 上手](galileo-gen2.md)
 
-### ThinkPad firmware
+### [一些机器的实验笔记](machines/README.md)
+
+#### ThinkPad firmware
 * [ThinkPad UEFI固件去白名单](tp-uefi-whitelist-removal.md)
-* [Blobs for HP laptops](blobs_for_hp_laptops.rst)
 * [TODO:coreboot with smapi?]
 
-### [一些机器的实验笔记](machines/README.md)
+#### HP firmware (主要是2760p,因为它的BIOS芯片可以直接插拔)
+* [Blobs for HP laptops](blobs_for_hp_laptops.rst)
 
 ### 文章收藏
 * [BIOS硬盘加密的逆向研究](https://jbeekman.nl/blog/2015/03/reverse-engineering-uefi-firmware/)
+* [Unlocking my Lenovo laptop](http://zmatt.net/unlocking-my-lenovo-laptop-part-1/): 最早的ThinkPad xx30 EC逆向工作
 * [UEFI编程入门](http://x86asm.net/articles/uefi-programming-first-steps/)
 * [SOP16与SOP8对应图](http://www.biosrepair.com/bios/TSSOP16.htm)
 * [PCI Express pinout](http://www.allpinouts.org/index.php/PCI_Express_Card_and_PCI_Express_Mini_Card)
