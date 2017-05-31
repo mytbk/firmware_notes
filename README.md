@@ -16,6 +16,7 @@
 * [让UEFI自动执行一个模块](uefi/uefi-driver.md)
 * [(小技巧)生成UUID](uefi/genuuid.md)
 * [UEFI逆向方法分析](uefi/reverse-uefi.md)
+* [A possible method to trace UEFI firmware](uefi/tracing-efi.md)
 * [WIP:edk2及clover的编译]
 * [WIP:Tianocore payload]
 
