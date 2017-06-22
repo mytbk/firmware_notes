@@ -1,0 +1,74 @@
+diff --git a/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIo.c b/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIo.c
+index 9474606e20..1aef525bc0 100644
+--- a/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIo.c
++++ b/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIo.c
+@@ -557,6 +557,39 @@ CpuIoServiceWrite (
+   return EFI_SUCCESS;
+ }
+ 
++#include <Protocol/SimpleFileSystem.h>
++#include <Guid/EventGroup.h>
++
++static VOID EFIAPI storeLog (
++		IN EFI_EVENT e,
++		IN VOID *context)
++{
++	EFI_STATUS Status;
++	EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *fs;
++	EFI_FILE_PROTOCOL *root;
++	EFI_FILE_PROTOCOL *fp = NULL;
++	UINTN sz;
++	char buffer[1000] = "hello";
++
++	Status = gBS->LocateProtocol(&gEfiSimpleFileSystemProtocolGuid, NULL, (VOID**)&fs);
++	if (EFI_ERROR(Status))
++		return;
++
++	Status = fs->OpenVolume(fs, &root);
++	if (EFI_ERROR(Status))
++		return;
++
++	Status = root->Open(root, &fp, L"log.txt",
++							  EFI_FILE_MODE_READ|EFI_FILE_MODE_WRITE|EFI_FILE_MODE_CREATE,
++							  0);
++	if (EFI_ERROR(Status) || fp==NULL)
++		return;
++
++	sz = 5;
++	fp->Write(fp, &sz, buffer);
++	fp->Close(fp);
++}
++
+ /**
+   The user Entry Point for module CpuIo. The user code starts with this function.
+ 
+@@ -584,5 +617,14 @@ CpuIoInitialize (
+                   );
+   ASSERT_EFI_ERROR (Status);
+ 
++  EFI_EVENT e;
++  Status = gBS->CreateEventEx(
++		  EVT_NOTIFY_SIGNAL,
++		  TPL_CALLBACK,
++		  storeLog,
++		  NULL,
++		  &gEfiEventReadyToBootGuid,
++		  &e);
++
+   return Status;
+ }
+diff --git a/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIoDxe.inf b/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIoDxe.inf
+index 368fa75bbb..99a2ceb1be 100644
+--- a/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIoDxe.inf
++++ b/IntelFrameworkModulePkg/Universal/CpuIoDxe/CpuIoDxe.inf
+@@ -43,6 +43,10 @@
+ 
+ [Protocols]
+   gEfiCpuIoProtocolGuid                         ## PRODUCES
++  gEfiSimpleFileSystemProtocolGuid
++
++[Guids]
++  gEfiEventReadyToBootGuid
+ 
+ [Depex]
+   TRUE
