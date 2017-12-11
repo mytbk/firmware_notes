@@ -20,6 +20,10 @@
 * [WIP:edk2及clover的编译]
 * [WIP:Tianocore payload]
 
+### Hardware
+* [shutting down an Intel machine](shutdown.rst)
+* [Intel PCH registers](pch-registers.txt)
+
 ### Intel Galileo
 * [Galileo Gen2 上手](galileo-gen2.md)
 

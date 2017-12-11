@@ -1,0 +1,10 @@
+RCBA(0x3410) GCS
+
+00:1f.0 0x88 GEN2_DEC 23:18 address mask | 15:2 base | 0 en
+00:1f.0 0x84 GEN1_DEC
+00:1f.0 0x90 GEN4_DEC
+00:1f.0 0x80 LCP_IO, LPC_EN
+00:1f.0 0x40 PMBASE 15:7 is the base address
+00:1f.0 0x48 GPIO_BASE 15:7 is the base address
+00:1f.0 0x4c GC (GPIO control)
+00:1f.0 0x64 SIRQ_CTRL
