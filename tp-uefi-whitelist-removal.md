@@ -27,6 +27,7 @@
 - X230 [Issue #4](https://github.com/mytbk/firmware_notes/issues/4)
 - T430s ([51nb](http://forum.51nb.com/thread-1699770-1-6.html))
 - E531
+- L540 (修改固件后，开机时有蜂鸣声，[AR9462](https://item.taobao.com/item.htm?id=555762063297) WiFi正常使用)
 
 ### (以下是老版本的内容，大家可以不看)
 
