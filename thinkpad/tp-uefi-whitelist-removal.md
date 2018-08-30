@@ -1,5 +1,8 @@
 ## ThinkPad UEFI固件白名单去除
+
 从Sandy Bridge一代开始，ThinkPad开始使用UEFI结构的固件，因此可以很容易地用UEFITool分析。以下可以用简单的方法去除ThinkPad UEFI固件的白名单。
+
+关于 LenovoWmaPolicyDxe.efi 的后续分析，可见 [再谈 ThinkPad 白名单](tp-whitelist.rst) 一文。
 
 **注意本文只是用于讲解UEFITool的使用方法。对于支持的coreboot的机型，建议使用自由的coreboot作为计算机的固件。**
 
