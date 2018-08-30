@@ -52,7 +52,7 @@
   |           0x000119a3      b900020000     mov ecx, 0x200              ; 512
   |           0x000119a8      ff9070010000   call qword [rax + 0x170]    ; 368 ; "gBS->CreateEventEx"
   |           0x000119ae      4883c438       add rsp, 0x38               ; '8'
-  
+ 
 它创建了一个事件，并且用了 gEfiEventReadyToBootGuid，说明这是在加载 bootloader 前要调一个函数。事实上，通过搜索 EDK2 的源码，可以在 EdkCompatibilityPkg/Foundation/Library/RuntimeDxe/EfiRuntimeLib/Event.c 找到这个函数，函数名叫 RtEfiCreateEventReadyToBoot. 我们看它的第2个参数 NotifyFunction，也就是 edx 的值 0x00010fd4. 先执行命令 ``af @ fcn.00010fd4`` 让 radare2 分析这个函数，再 ``pdf @ fcn.00010fd4``.
 
 这里省略此函数的代码。看这个函数，它是用了此前 LocateProtocol 找到的一个协议的实例，调用了它的两个函数，似乎没什么和白名单检测相关的地方。我们接下来看看用 InstallProtocolInterface 安装的那个协议。
@@ -62,7 +62,7 @@
   [0x0001102c]> x 16 @ 0x00010490
   - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
   0x00010490  d4a9 1242 924a fb4b b47f 2734 355f 54ac  ...B.J.K..'45_T.
-  
+
 用 UEFITool 找 GUID 4212a9d4-...，结果发现，只有3个模块引用了这个 GUID，除了 LenovoWmaPolicyDxe.efi 外，就是 LenovoWmaPciDxe.efi 和 LenovoWmaUsbDxe.efi，看名字就知道，它们是用于检测 PCI 和 USB 设备的白名单的。
 
 接着看 protocol interface 0x00011dd8，注意后面跟着的指令，发现程序往这个地方写了一个值 0x00010e1c. 尝试用 af 分析该函数再用 pdf 打印，发现它的确是一个函数。当然了，也可以通过 LenovoWmaPciDxe.efi 看这个协议的使用方式，可以知道往 protocol interface 里面填的就是个函数指针。
@@ -145,7 +145,7 @@
   |  | |: :   0x00010cca      83f806         cmp eax, 6                  ; 6
   |  | |`===< 0x00010ccd      0f840affffff   je 0x10bdd
   |  | |  `=< 0x00010cd3      ebb6           jmp 0x10c8b
-  
+
 里面调用了一个函数 fcn.00010a0c，查看这个函数，可以发现里面有些格式字符串 ``u"%04x/%04x"`` ，可以猜测这是检测到设备不在白名单时输出信息用的。再看看循环里面的寻址 ``movzx ecx, word [r8 + rdx + 6]`` ，前面 r8 被清零，rdx 设为一个地址 0x00010270，要访问的就在这个地址之后，我们 ``x @ 0x00010270`` 可以看到，里面的确是一堆含有设备 ID 的数据。
 
 于是要去除白名单检测，有几种方法：

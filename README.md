@@ -31,7 +31,7 @@
 
 #### ThinkPad firmware
 * [ThinkPad UEFI固件去白名单](thinkpad/tp-uefi-whitelist-removal.md)
-* [再谈ThinkPad 白名单](thinkpad/tp-whitelist.rst)
+* [再谈 ThinkPad 白名单](thinkpad/tp-whitelist.rst)
 * [TODO:coreboot with smapi?]
 
 #### HP firmware (主要是2760p,因为它的BIOS芯片可以直接插拔)
