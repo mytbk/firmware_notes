@@ -69,9 +69,9 @@ fcn.180000798()
 	rbx = 0x84;
 	edi = 4;
 	do {
-		r9d = eax = fcn.1800020a8(0xf800, rbx);
-		eax &= 0xfffc;
-		r9d &= 0xfc0000;
+		r9d = eax = pci_read(0xf800, rbx); /* read LPC_GEN*_DEC */
+		eax &= 0xfffc; /* decode range base address */
+		r9d &= 0xfc0000; /* decode range address mask */
 		if (eax == 0x920) {
 			if (r9d < 0x200000) {
 				r9d = 0x1c0000;
@@ -79,7 +79,7 @@ fcn.180000798()
 				r9d = 0x200000;
 			}
 			r9d |= 0x900;
-			fcn.1800020d4(0xf800, rbx, 0xfcfffc, r9d);
+			pci_clear_set_bits(0xf800, rbx, 0xfcfffc, r9d);
 		}
 		rbx += 4;
 		rdi--;
@@ -94,51 +94,43 @@ fcn.180000714()
 	rbx = 0x84;
 	edi = 4;
 	do {
-		r9d = eax = fcn.1800020a8(0xf800, rbx);
-		eax &= 0xfffc;
-		r9d &= 0xfc0000;
+		r9d = eax = pci_read(0xf800, rbx); /* read LPC_GEN*_DEC */
+		eax &= 0xfffc; /* decode range base address */
+		r9d &= 0xfc0000; /* decode range address mask */
 		if (eax == 0x900) {
 			if (r9d > 0x200000) {
-				r9d += 0xffe00000;
+				r9d -= 0x200000;
 			} else {
 				r9d = 0;
 			}
 			r9d |= 0x920;
-			fcn.1800020d4(0xf800, rbx, 0xfcfffc, r9d);
+			pci_clear_set_bits(0xf800, rbx, 0xfcfffc, r9d);
 		}
 		rbx += 4;
 		rdi--;
 	} while (rdi != 0);
 }
 
-fcn.1800020a8(a0, a1)
+pci_read(uint32_t bdf, uint32_t offset) /* 0x1800020a8, bdf is (b<<16)|(d<<11)|(f<<8) */
 {
-	r8 = a1;
-	a0 &= 0xffffff00;
-	eax = a0 + a1;
-	edx = 0xcf8;
-	r8w &= 3;
-	eax &= 0xfffffffc;
-	eax |= 0x80000000;
-	outl(eax, dx);
-	edx = 0xcfc + r8w;
-	return inl(dx);
+	bdf &= 0xffffff00;
+	uint32_t addr = ((bdf + offset) & 0xfffffffc) | 0x80000000;
+	outl(addr, 0xcf8);
+	return inl(0xcfc + (offset & 3));
 }
 
-fcn.1800020d4(uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3)
+pci_clear_set_bits(uint32_t bdf, uint32_t offset, uint32_t clr_bits, uint32_t set_bits) /* 0x1800020d4 */
 {
-	a0 &= 0xffffff00;
-	a2 = ~a2;
-	eax = a0 + a1;
-	eax &= 0xfffffffc;
-	eax |= 0x80000000;
-	outl(eax, 0xcf8);
+	bdf &= 0xffffff00;
+	clr_bits = ~clr_bits;
+	uint32_t addr = ((bdf + offset) & 0xfffffffc) | 0x80000000;
+	outl(addr, 0xcf8);
 
-	edx = 0xcfc + (a1 & 3);
-	eax = inl(dx);
-	eax &= a2;
-	eax |= a3;
-	outl(eax, dx);
+	uint16_t cfc_addr = 0xcfc + (offset & 3);
+	eax = inl(cfc_addr);
+	eax &= clr_bits;
+	eax |= set_bits;
+	outl(eax, cfc_addr);
 }
 
 fcn.180000348(uint8_t * a0, uint8_t a1)
