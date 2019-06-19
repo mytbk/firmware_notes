@@ -37,6 +37,8 @@
 #### HP firmware (主要是2760p,因为它的BIOS芯片可以直接插拔)
 * [Blobs for HP laptops](blobs_for_hp_laptops.rst)
 
+#### [Clevo（蓝天）笔记本](clevo)
+
 ### 文章收藏
 * [BIOS硬盘加密的逆向研究](https://jbeekman.nl/blog/2015/03/reverse-engineering-uefi-firmware/)
 * [Unlocking my Lenovo laptop](http://zmatt.net/unlocking-my-lenovo-laptop-part-1/): 最早的ThinkPad xx30 EC逆向工作
